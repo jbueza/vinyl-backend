@@ -1,16 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const config = require('konfig')();
-const SC = require('node-soundcloud');
 const _ = require('lodash');
+const SoundCloudService = require('../services/SoundCloudService')();
 const SpotifyService = require('../services/SpotifyService')();
-
-// Initialize client
-SC.init({
-  id: config.soundcloud.clientID,
-  secret: config.soundcloud.clientSeret,
-  uri: config.soundcloud.redirectUri
-});
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -25,31 +17,33 @@ router.get('/init', function(req, res) {
 
 router.get('/oauth/soundcloud', function(req, res) {
   const code = req.query.code;
-
-  SC.authorize(code, function(err, accessToken) {
+  SoundCloudService.login({
+    code: code
+  }, function(err, result) {
     if (err) {
-      throw err;
-    } else {
-      // Client is now authorized and able to make API calls
-      console.log('access token:', accessToken);
-      res.json({
-        token: accessToken
+      return res.send(400, {
+        error: err.message
       });
     }
-  });
+    return res.json(result);
+  })
+
 });
 
 router.get('/soundcloud/tracks', function(req, res) {
   const params = req.query;
-
-  SC.get('/tracks', {
+  SoundCloudService.search({
     q: params.q,
     license: 'cc-by-sa'
   }, function(err, result) {
-    console.log(err);
-
+    if (err) {
+      return res.send(400, {
+        error: err.message
+      });
+    }
     return res.json(result);
-  });
+  })
+
 });
 
 

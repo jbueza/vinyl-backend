@@ -86,25 +86,9 @@ module.exports = () => {
     });
   };
 
-  function getTracksByAlbum(params, cb) {
-
-    var id = params.albumId;
-
-    getClient(function(err, spotify) {
-      console.log('getting client');
-      spotify.get('spotify:album:7u6zL7kqpgLPISZYXNTgYk', function(err, album) {
-        console.log(album);
-        console.log(err);
-        return cb(undefined, album)
-      });
-    });
-
-
-  };
 
   return {
     search: search,
-    getAlbums: getAlbums,
-    getTracksByAlbum: getTracksByAlbum
+    getAlbums: getAlbums
   };
 };
