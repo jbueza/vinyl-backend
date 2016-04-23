@@ -3,6 +3,8 @@ const router = express.Router();
 const config = require('konfig')();
 const SC = require('node-soundcloud');
 const _ = require('lodash');
+const SpotifyService = require('../services/SpotifyService')();
+
 // Initialize client
 SC.init({
   id: config.soundcloud.clientID,
@@ -10,8 +12,6 @@ SC.init({
   uri: config.soundcloud.redirectUri
 });
 
-console.log(config);
-/* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
@@ -39,7 +39,7 @@ router.get('/oauth/soundcloud', function(req, res) {
   });
 });
 
-router.get('/tracks', function(req, res) {
+router.get('/soundcloud/tracks', function(req, res) {
   const params = req.query;
 
   SC.get('/tracks', {
@@ -47,17 +47,64 @@ router.get('/tracks', function(req, res) {
     license: 'cc-by-sa'
   }, function(err, result) {
     console.log(err);
-    console.log(result);
-    //use original instead of t500x500
 
-    // var obj = _.map(result, (row) => {
-    //   var x = {
-    //     id: row.id
-    //   }
-    // })
-
-    res.json(result);
+    return res.json(result);
   });
 });
+
+
+
+router.get('/spotify/search', function(req, res) {
+  SpotifyService.search({
+    query: req.query
+  }, function(err, result) {
+    if (err) {
+      return res.send(400, {
+        error: err.message
+      });
+    }
+
+    return res.json(result);
+  });
+});
+
+router.get('/spotify/albums', function(req, res) {
+  SpotifyService.getAlbums({}, function(err, result) {
+    if (err) {
+      return res.send(400, {
+        error: err.message
+      });
+    }
+
+    console.log('whats')
+
+    return res.json(result);
+  });
+});
+
+router.get('/spotify/albums/:id', function(req, res) {
+  SpotifyService.getTracksByAlbum({
+    albumId: req.params.id
+  }, function(err, result) {
+    if (err) {
+      return res.send(400, {
+        error: err.message
+      });
+    }
+
+    return res.json(result);
+  });
+});
+
+
+// router.get('/blah', function(req, res) {
+//   var albumArt = require('album-art');
+//   albumArt('Taylor Swift', '1989', 'mega', function(err, url) {
+//     console.log(url);
+
+//     return res.json({ url: url });
+//     //=> http://path/to/beatles/abbey_road_large.jpg
+//   });
+// });
 
 module.exports = router;
