@@ -1,7 +1,6 @@
 'use strict';
 
 const config = require('konfig')();
-const Spotify = require('spotify-web');
 const xml2js = require('xml2js');
 const _ = require('lodash');
 var SpotifyWebApi = require('spotify-web-api-node');
@@ -26,39 +25,9 @@ var spotifyApi = new SpotifyWebApi({
 
 module.exports = () => {
 
-  function getClient(cb) {
-
-    Spotify.login(config.spotify.username, config.spotify.password, function(err, spotify) {
-      if (err) {
-        return cb(err);
-      }
-      return cb(undefined, spotify);
-
-    });
-
-  };
-
   function search(params, cb) {
-    Spotify.login(config.spotify.username, config.spotify.password, function(err, spotify) {
-      if (err) {
-        return cb(err);
-      }
-
-      spotify.search(params.query, function(err, xml) {
-        if (err) {
-          return cb(err);
-        }
-
-        spotify.disconnect();
-
-        var parser = new xml2js.Parser();
-        parser.on('end', function(data) {
-          return cb(undefined, data);
-        });
-        parser.parseString(xml);
-      });
-    });
-  };
+    return cb();
+  }
 
   function getAlbums(params, cb) {
     spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE', { limit: 10, offset: 20 }, function(err, data) {
