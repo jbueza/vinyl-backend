@@ -6,6 +6,15 @@ const xml2js = require('xml2js');
 const _ = require('lodash');
 var SpotifyWebApi = require('spotify-web-api-node');
 
+if (process.env.NODE_ENV === 'production') {
+  config = {
+    spotify: {
+      clientID: process.env.SPOTIFY_CLIENT_ID,
+      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    }
+  }
+}
+
 // credentials are optional
 var spotifyApi = new SpotifyWebApi({
   clientId: config.spotify.clientID,
