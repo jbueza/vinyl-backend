@@ -1,18 +1,18 @@
 'use strict';
 
-const config = require('konfig')();
+
 const SC = require('node-soundcloud');
 const _ = require('lodash');
 var SpotifyWebApi = require('spotify-web-api-node');
 
-if (process.env.NODE_ENV === 'production') {
-  config = {
-    soundcloud: {
-      clientID: process.env.SOUNDCLOUD_CLIENT_ID,
-      clientSecret: process.env.SOUNDCLOUD_CLIENT_SECRET,
-    }
+
+const config = {
+  soundcloud: {
+    clientID: process.env.SOUNDCLOUD_CLIENT_ID,
+    clientSecret: process.env.SOUNDCLOUD_CLIENT_SECRET,
   }
 }
+
 
 
 // Initialize client

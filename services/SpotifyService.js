@@ -1,16 +1,16 @@
 'use strict';
 
-const config = require('konfig')();
+
+
 const xml2js = require('xml2js');
 const _ = require('lodash');
 var SpotifyWebApi = require('spotify-web-api-node');
 
-if (process.env.NODE_ENV === 'production') {
-  config = {
-    spotify: {
-      clientID: process.env.SPOTIFY_CLIENT_ID,
-      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    }
+const config = {
+  spotify: {
+    clientID: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    redirectUri: process.env.SPOTIFY_REDIRECT_URI
   }
 }
 
@@ -21,6 +21,8 @@ var spotifyApi = new SpotifyWebApi({
   redirectUri: config.spotify.redirectUri
 });
 
+
+console.log(process.env);
 
 
 module.exports = () => {
