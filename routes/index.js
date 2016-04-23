@@ -70,7 +70,9 @@ router.get('/spotify/albums', function(req, res) {
       });
     }
 
-    return res.json(result);
+    return res.json({
+      result: result
+    });
   });
 });
 
