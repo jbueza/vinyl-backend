@@ -39,16 +39,18 @@ module.exports = () => {
     //spotify:album:2w1YJXWMIco6EBf0CovvVN
     //spotify:album:2guirTSEqLizK7j9i1MTTZ
     //spotify:album:2BYtboV23ZFcNJgM6kYt6A
+    //spotify:album:7HWdGPosPkb9GY5MOgLgSW - Tycho - Awake
     spotifyApi.getAlbums([
-        '4sb0eMpDn3upAFfyi4q2rw',
-        '0Y4QAA8YOOyMfqs4a8i2OK',
-        '14IOe7ahxQPTwUYUQX3IFi',
-        '3Oj8FdHcV6kAiOVWfkqRaA',
-        '500FEaUzn8lN9zWFyZG5C2',
-        '4WD4pslu83FF6oMa1e19mF',
-        '1Zp3jrBB28aWXm0aXzV9GN',
-        '2w1YJXWMIco6EBf0CovvVN',
-        '2BYtboV23ZFcNJgM6kYt6A'
+        '4sb0eMpDn3upAFfyi4q2rw',   // Miles Davis
+        //'0Y4QAA8YOOyMfqs4a8i2OK', // NIN
+        //'14IOe7ahxQPTwUYUQX3IFi', // Glass Animal
+        //'3Oj8FdHcV6kAiOVWfkqRaA', // Metric
+        //'500FEaUzn8lN9zWFyZG5C2', // Radiohead
+        //'4WD4pslu83FF6oMa1e19mF', // Bob Dylan
+        //'1Zp3jrBB28aWXm0aXzV9GN', // Dub Tractor
+        '2w1YJXWMIco6EBf0CovvVN',   //black star
+        '2BYtboV23ZFcNJgM6kYt6A',   //Guides
+        '7HWdGPosPkb9GY5MOgLgSW'    // Tycho
       ])
       .then(function(data) {
         var result = _.map(data.body.albums, function(row) {
