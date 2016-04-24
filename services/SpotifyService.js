@@ -38,6 +38,7 @@ module.exports = () => {
     //spotify:album:1Zp3jrBB28aWXm0aXzV9GN
     //spotify:album:2w1YJXWMIco6EBf0CovvVN
     //spotify:album:2guirTSEqLizK7j9i1MTTZ
+    //spotify:album:2BYtboV23ZFcNJgM6kYt6A
     spotifyApi.getAlbums([
         '4sb0eMpDn3upAFfyi4q2rw',
         '0Y4QAA8YOOyMfqs4a8i2OK',
@@ -46,7 +47,8 @@ module.exports = () => {
         '500FEaUzn8lN9zWFyZG5C2',
         '4WD4pslu83FF6oMa1e19mF',
         '1Zp3jrBB28aWXm0aXzV9GN',
-        '2w1YJXWMIco6EBf0CovvVN'
+        '2w1YJXWMIco6EBf0CovvVN',
+        '2BYtboV23ZFcNJgM6kYt6A'
       ])
       .then(function(data) {
         var result = _.map(data.body.albums, function(row) {
