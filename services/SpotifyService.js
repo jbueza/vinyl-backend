@@ -44,11 +44,9 @@ module.exports = () => {
         '14IOe7ahxQPTwUYUQX3IFi',
         '3Oj8FdHcV6kAiOVWfkqRaA',
         '500FEaUzn8lN9zWFyZG5C2',
-        '6w4iHE8FlMASJVepo3bAJW',
         '4WD4pslu83FF6oMa1e19mF',
         '1Zp3jrBB28aWXm0aXzV9GN',
-        '2w1YJXWMIco6EBf0CovvVN',
-        '2guirTSEqLizK7j9i1MTTZ'
+        '2w1YJXWMIco6EBf0CovvVN'
       ])
       .then(function(data) {
         var result = _.map(data.body.albums, function(row) {
